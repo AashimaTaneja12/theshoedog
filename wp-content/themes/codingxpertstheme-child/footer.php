@@ -141,6 +141,15 @@
              jQuery('#ending').datetimepicker( );});
 
          </script>
+         <script>
+         	jQuery(document).ready(function($){
+    	$("input[name=number_box_1559908385]").attr("maxlength", "10");
+   		$("input[name=number_box_1559908385]").attr("pattern","/^-?\d+\.?\d*$/");
+   		$("input[name=number_box_1559908385]").attr("onKeyPress","if(this.value.length==10)return false;");
+});
+         </script>
+
+
 
 
 
