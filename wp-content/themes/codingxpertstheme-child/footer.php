@@ -148,11 +148,33 @@
    		$("input[name=number_box_1559908385]").attr("onKeyPress","if(this.value.length==10)return false;");
 });
          </script>
+         <script>
+         	var url = window.location.href;
+         	var baseUrl = '<?= get_bloginfo("wpurl"); ?>/sign-up/';
+         	if(url == baseUrl){
+         		//$("#content").removeAttr('id').appendTo("#main-col-inner");
 
+         		$('#content').addClass("myClass");   
+				$("#content").removeAttr('id');
+         	}
+         	
+         </script>
 
+          <script>
+         	var url = window.location.href;
+         	var baseUrl = '<?= get_bloginfo("wpurl"); ?>/sign-up/';
+         	if(url == baseUrl){
+         		//$("#content").removeAttr('id').appendTo("#main-col-inner");
 
-
-
-
+         		$('.box_title').addClass("title");   
+				
+         	}
+         	
+         </script>
+<style type="text/css">
+	#footer-widget-area{
+		color: #fff !important;
+	}
+</style>
 </body>
 </html>

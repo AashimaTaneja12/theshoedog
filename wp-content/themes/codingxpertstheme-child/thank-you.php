@@ -78,6 +78,7 @@ else{
 		<div class="row">
 			<div class="col-lg-4 col-md-4" style="height: 100%;">
 					<h3 class="font-weight-bold mb-4">Order received</h3>
+					<!-- <p>Thank you.Your order has been received</p> -->
 				<div class="p-4 border rounded fix_height">
 					<p class="font-weight-bold">Thank you.Your order has been received</p>
 					<p class="font-weight-bold">ORDER NUMBER : </p>

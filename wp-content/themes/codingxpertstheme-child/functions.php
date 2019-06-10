@@ -176,7 +176,7 @@ function auctionTheme_get_post_function_grid( $arr = '')
                             <li>
 
                                 <p><?php// echo auctionTheme_get_show_price(auctionTheme_get_current_price(get_the_ID())); ?>
-                                <p><?php echo "R".auctionTheme_get_current_price(get_the_ID()); ?>
+                                <p><?php echo "R".get_post_meta(get_the_ID(), 'buy_now', true); ?>
                                 <?php if($only_buy_now == '1') : ?>
 
                                 [<?php _e("BuyNow",'AuctionTheme'); ?>]
@@ -326,59 +326,59 @@ function auctionTheme_get_post_function( $arr = '')
                    <?php if(!AuctionTheme_is_different_home_layout() ) { ?>
 
                   <?php if( $pay_this_me != 1): ?>
-                  <a href="<?php the_permalink(); ?>" class="post_bid_btn"><?php echo __("Read More", "AuctionTheme");?></a>
+                  <a href="<?php the_permalink(); ?>" class="post_bid_btn"><?php echo __("Read Moree", "AuctionTheme");?></a>
                   <?php endif; ?>
 
-                  <?php if( $paid != 1 and ($post->post_author == $uid)): ?>
+                  <!-- <?php if( $paid != 1 and ($post->post_author == $uid)): ?>
                   <a href="<?php echo AuctionTheme_post_new_with_pid_stuff_thg(get_the_ID(), 3); ?>" class="post_bid_btn"><?php echo __("Publish", "AuctionTheme");?></a>
-                  <?php endif; ?>
+                  <?php endif; ?> -->
 
 
 
 
-                  <?php if($post->post_author == $uid) {
+                  <?php /*if($post->post_author == $uid) {
 
-                  if(auctionTheme_number_of_bid_see_and_buy_now(get_the_ID()) != false) { $mms = 1;
+                  if(auctionTheme_number_of_bid_see_and_buy_now(get_the_ID()) != false) { $mms = 1;*/
                   ?>
-                  <a href="<?php bloginfo('siteurl') ?>/?a_action=edit_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Edit Auction", "AuctionTheme");?></a>
+                  <!-- <a href="<?php bloginfo('siteurl') ?>/?a_action=edit_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Edit Auction", "AuctionTheme");?></a> -->
 
-                  <?php }
+                  <?php //}
 
-                  if($mms != 1){
-                    if( get_option('AuctionTheme_enable_editing_when_bid_placed') == "yes"){
+                  /*if($mms != 1){
+                    if( get_option('AuctionTheme_enable_editing_when_bid_placed') == "yes"){*/
                   ?>
-                   <a href="<?php bloginfo('siteurl') ?>/?a_action=edit_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Edit Auction", "AuctionTheme");?></a>
+                   <!-- <a href="<?php bloginfo('siteurl') ?>/?a_action=edit_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Edit Auction", "AuctionTheme");?></a> -->
 
                   <?php
-                  }}
+                  //}}
 
-                    if($rows->paid == '0')
+                    /*if($rows->paid == '0')
                     {
                         ?>
                                 <a href="<?php bloginfo('siteurl') ?>/?a_action=mark_paid&bid_id=<?php echo $bid_ids; ?>" class="post_bid_btn"><?php echo __("Mark Paid", "AuctionTheme");?></a>
                         <?php
-                    }
+                    }*/
 
                   ?>
 
-                  <?php }   ?>
+                  <?php //}   ?>
 
-                  <?php if($post->post_author == $uid) //$closed == 1)
-                  { ?>
+                  <?php // if($post->post_author == $uid) //$closed == 1)
+                 // { ?>
 
-                   <?php if($closed == "1") //$closed == 1)
-                  { ?>
-                  <a href="<?php bloginfo('siteurl') ?>/?a_action=relist_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Repost Auction", "AuctionTheme");?></a>
+                   <?php //if($closed == "1") //$closed == 1)
+                  //{ ?>
+                  <!-- <a href="<?php bloginfo('siteurl') ?>/?a_action=relist_auction&pid=<?php the_ID(); ?>" class="post_bid_btn"><?php echo __("Repost Auction", "AuctionTheme");?></a> -->
 
-                  <?php } /*} else { */
+                  <?php //} /*} else { */
 
-                  if(auctionTheme_has_1_bid($pid) == false):
+                 /* if(auctionTheme_has_1_bid($pid) == false):*/
 
                   ?>
 
-                   <a href="<?php bloginfo('siteurl') ?>/?a_action=delete_auction&pid=<?php the_ID(); ?>" class="post_bid_btn_err"><?php echo __("Delete", "AuctionTheme");?></a>
+                   <!-- <a href="<?php bloginfo('siteurl') ?>/?a_action=delete_auction&pid=<?php the_ID(); ?>" class="post_bid_btn_err"><?php echo __("Delete", "AuctionTheme");?></a> -->
 
-                  <?php endif; } ?>
+                  <?php //endif; } ?>
 
                   <?php } ?>
 
@@ -498,12 +498,402 @@ function auctionTheme_get_post_function( $arr = '')
 }
 }
 
-/*add_action('init', 'myStartSession', 1);
-function myStartSession() {
-    if(!session_id()) {
-        session_start();
-    }
-}*/
+// Register and load the widget
+function wpb_load_widget() {
+    register_widget( 'wpb_widget_nike' );
+}
+add_action( 'widgets_init', 'wpb_load_widget' );
+ 
+// Creating the widget 
+class wpb_widget_nike extends WP_Widget {
+ 
+function __construct() {
+parent::__construct(
+ 
+// Base ID of your widget
+'wpb_widget_nike', 
+ 
+// Widget name will appear in UI
+__('Nike_Products', 'wpb_widget_domain_nike'), 
+ 
+// Widget description
+array( 'description' => __( 'Sample widget based on WPBeginner Tutorial', 'wpb_widget_domain_nike' ), ) 
+);
+}
+ 
+// Creating widget front-end
+ 
+public function widget( $args, $instance ) {
+
+
+global $wpdb;
+
+  echo "Nike";
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 139 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+
+         
+// Widget Backend 
+public function form( $instance ) {
+
+ /* echo "Hello";*/
+
+  global $wpdb;
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 139 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+  
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+     
+
+} 
+
+
+/*==========================Display adidas widget=========================*/
+
+
+function wpb_load_widget_adidas() {
+    register_widget( 'wpb_widget_adidas' );
+}
+add_action( 'widgets_init', 'wpb_load_widget_adidas' );
+ 
+// Creating the widget 
+class wpb_widget_adidas extends WP_Widget {
+ 
+function __construct() {
+parent::__construct(
+ 
+// Base ID of your widget
+'wpb_widget_adidas', 
+ 
+// Widget name will appear in UI
+__('Adidas_Products', 'wpb_widget_domain_adidas'), 
+ 
+// Widget description
+array( 'description' => __( 'Adidas Products', 'wpb_widget_domain_adidas' ), ) 
+);
+}
+ 
+// Creating widget front-end
+ 
+public function widget( $args, $instance ) {
+
+
+global $wpdb;
+
+  echo "Adidas";
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 141 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+
+         
+// Widget Backend 
+public function form( $instance ) {
+
+ // echo "Hello";
+
+  global $wpdb;
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 141 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+     
+
+}
+
+
+/*=====================End Adidas widget ===========================*/
+
+
+/*===================Display Air jorden widget ===========================*/
+
+
+
+function wpb_load_widget_jorden() {
+    register_widget( 'wpb_widget_jorden' );
+}
+add_action( 'widgets_init', 'wpb_load_widget_jorden' );
+ 
+// Creating the widget 
+class wpb_widget_jorden extends WP_Widget {
+ 
+function __construct() {
+parent::__construct(
+ 
+// Base ID of your widget
+'wpb_widget_jorden', 
+ 
+// Widget name will appear in UI
+__('AirJorden_Products', 'wpb_widget_domain_jorden'), 
+ 
+// Widget description
+array( 'description' => __( 'AirJorden Products', 'wpb_widget_domain_adidas' ), ) 
+);
+}
+ 
+// Creating widget front-end
+ 
+public function widget( $args, $instance ) {
+
+
+global $wpdb;
+
+  echo "Air Jorden";
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 138 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+
+         
+// Widget Backend 
+public function form( $instance ) {
+
+  //echo "Hello";
+
+  global $wpdb;
+
+  $category_nike = $wpdb->get_results("SELECT * from wp_term_relationships WHERE term_taxonomy_id = 138 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE ID = '".$object_id."'");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  }
+
+}
+     
+
+}
+
+
+
+/*================End Air jorden widget=========================*/
+
+
+/*===================Display recent updates================*/
+
+
+
+function wpb_load_widget_recentpro() {
+    register_widget( 'wpb_widget_recentpro' );
+}
+add_action( 'widgets_init', 'wpb_load_widget_recentpro' );
+ 
+// Creating the widget 
+class wpb_widget_recentpro extends WP_Widget {
+ 
+function __construct() {
+parent::__construct(
+ 
+// Base ID of your widget
+'wpb_widget_recentpro', 
+ 
+// Widget name will appear in UI
+__('Recent_Products', 'wpb_widget_domain_recentpro'), 
+ 
+// Widget description
+array( 'description' => __( 'Recent Products', 'wpb_widget_domain_recentpro' ), ) 
+);
+}
+ 
+// Creating widget front-end
+ 
+public function widget( $args, $instance ) {
+
+
+global $wpdb;
+
+  echo "Recent Updates";
+
+ /*$category_nike = $wpdb->get_results("SELECT  from wp_term_relationships WHERE term_taxonomy_id = 138 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;*/
+    $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE post_type='auction' ORDER BY ID desc LIMIT 0,6");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  //}
+
+}
+
+         
+// Widget Backend 
+public function form( $instance ) {
+
+  //echo "Hello";
+
+  global $wpdb;
+
+ /* $category_nike = $wpdb->get_results("SELECT  from wp_term_relationships WHERE term_taxonomy_id = 138 ORDER BY object_id desc LIMIT 0 ,6");
+
+  
+  foreach($category_nike as $nike)
+  {
+    $object_id = $nike->object_id;*/
+   $get_title = $wpdb->get_results("SELECT * from wp_posts WHERE post_type='auction' ORDER BY ID desc LIMIT 0,6");
+
+   
+
+   foreach($get_title as $title)
+   {
+
+     $product_title = $title->post_title;
+     $guid = $title->guid;
+
+     ?>
+     <p><a href="<?php echo $guid;?>"><?php echo $product_title;?></a>
+     <?php
+   }
+
+  //}
+
+}
+     
+
+}
+
+
+/*=================End display recent product====================*/
+
+
+
+
 
 
 

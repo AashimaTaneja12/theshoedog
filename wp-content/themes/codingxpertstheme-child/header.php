@@ -673,7 +673,7 @@
 <div id="main" class="container" >
 	<?php if(is_front_page() ) { ?>
 	<div class="brands">
-		<h4> POPULAR BRANDS <span class="more"> SEE ALL </span> <div class="clear"></div> </h4>
+		<h4> POPULAR BRANDS <span class="more"><a href="<?php echo $url;?>/all-categories/"> SEE ALL</a> </span> <div class="clear"></div> </h4>
 
 		<hr>
 	</div>
